@@ -12,9 +12,10 @@ class PostsController extends Controller
     {
         $this->middleware('auth')->except(['index', 'show']);
     }
+
     public function index()
     {
-        $posts = Post::latest()->get();
+        $posts = Post::latest()->get()->all();
 
     	return view('posts.index', compact('posts'));
     }
@@ -36,11 +37,14 @@ class PostsController extends Controller
             'body' => 'required'
         ]);
 
-        Post::create([
-            'title' => request('title'),
-            'body' => request('body'),
-            'user_id' => auth()->id()
-        ]);
+        Post::create(request(['title', 'body']));
+
+        // Post::create([
+        //     'title' => request('title'),
+        //     'body' => request('body'),
+        //     'user_id' => auth()->id()
+        // ]);
+
 
     	return redirect('/');
     }

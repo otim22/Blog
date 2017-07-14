@@ -5,6 +5,7 @@
 <div class="col-sm-8 blog-main">
 
 	<h1>Publish a Post</h1>
+	<hr>
 
 	<form method="POST" action="/posts">
 	
@@ -16,7 +17,7 @@
 		</div>
 
 		<div class="form-group">
-			<label for="body">Body:</label>
+			<label for="body">Body</label>
 			<input class="form-control" id="body" name="body">
 		</div>
 

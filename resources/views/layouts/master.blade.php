@@ -19,7 +19,7 @@
     <link href="../../assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="/css/blog.css" rel="stylesheet">
+    <link href="/css/app.css" rel="stylesheet">
   </head>
 
   <body>
@@ -31,6 +31,7 @@
         <h1 class="blog-title">The Bootstrap Blog</h1>
         <p class="lead blog-description">The official example template of creating a blog with Bootstrap.</p>
     </div>
+        <hr>
   </div>
 
   <div class="container">
