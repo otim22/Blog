@@ -4,23 +4,41 @@
 
 <div class="col-sm-8 blog-main">
 
-  <h1> {{ $post->title }} </h1>
+  <h1>{{ $post->title }} </h1>
 
-  {{ $post->body }}
+  @if (count($post->tags))
+    <ul>
+     @foreach ($post->tags as $tag)
+        <li>
+          <a href="/posts/tags/{{ $tag->name }}">
+            {{ $tag->name }}
+          </a>
+        </li>
+     @endforeach 
+    </ul>
+  @endif
+
+      {{ $post->body }}
+
+  <hr>
 
   <div class="comments">
   	<ul class="list-group">
+
   		@foreach ($post->reactions as $reaction)
 			<li class="list-group-item">
+      
 				<strong>
-					{{ $reaction->created_at->diffForHumans() }}
+					{{ $reaction->created_at->diffForHumans() }} &nbsp;
 				</strong>
 
 				{{ $reaction->body }}
 
 			</li>
   		@endforeach
+
   	</ul>
+    </div>
 
   	<div class="card">
   		<div class="card-block">
@@ -35,12 +53,12 @@
   				</div>
 
   				<div class="form-group">
-					<button type="submit" class="btn btn-primary">Add comment</button>
-				</div>
+					 <button type="submit" class="btn btn-primary">Add comment</button>
+				  </div>
 
 				@include('layouts.errors')
+
   			</form>
-  		</div>
   	</div>
   </div>
 

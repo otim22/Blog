@@ -14,19 +14,17 @@ class SessionController extends Controller
     public function create()
     {
     	return view('sessions.create');
-
     }
 
     public function store()
     {
-    	if (! auth()->attempt(request(['email', 'password']))) {
+    	if (auth()->attempt(request(['email', 'password']))) {
     		return back()->withErrors([
     			'message' => 'Please check your credentials and try again'
 			]);
     	}
 
     	return redirect()->home();
-
     }
 
     public function destroy()

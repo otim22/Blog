@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 
 use App\Post;
+use Carbon\Carbon;
 
 
 class PostsController extends Controller
@@ -15,7 +16,10 @@ class PostsController extends Controller
 
     public function index()
     {
-        $posts = Post::latest()->get()->all();
+        // $posts = Post::latest()->get();
+        $posts = Post::latest()
+                    ->filter(request(['month', 'year']))
+                    ->get();
 
     	return view('posts.index', compact('posts'));
     }
@@ -37,14 +41,13 @@ class PostsController extends Controller
             'body' => 'required'
         ]);
 
-        Post::create(request(['title', 'body']));
+        auth()->user()->publish(
+            new Post(request(['title', 'body']))
+        ); 
 
-        // Post::create([
-        //     'title' => request('title'),
-        //     'body' => request('body'),
-        //     'user_id' => auth()->id()
-        // ]);
-
+        sesson()->flash(
+            'message', 'Your post has been published'
+        );
 
     	return redirect('/');
     }
